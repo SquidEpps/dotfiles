@@ -23,7 +23,10 @@ Plugin 'henrik/vim-indexed-search'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-surround'
+Plugin 'kchmck/vim-coffee-script'
 "Plugin 'vim-scripts/YankRing.vim'
+Plugin 'leafgarland/typescript-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -36,7 +39,7 @@ colorscheme spacegray
 set mouse=a
 set ttymouse=xterm2
 
-set nocp ls=2 cul nu hls t_Co=256 ts=3 sts=3 sw=3 ar acd ai si bs=2 noet scs ic is sm sc so=9 siso=9 udf udir=~/.vim/undodir wmnu wim=longest:full,full dir=~/.vim/swapfiles//
+set nocp ls=2 cul nu hls t_Co=256 ts=3 sts=0 sw=0 ar acd ai si bs=2 noet scs ic is sm sc so=9 siso=9 udf udir=~/.vim/undodir wmnu wim=longest:full,full dir=~/.vim/swapfiles//
 
 silent call system('if [ ! -d ' . &udir . ' ]; then mkdir -p ' . &udir . '; fi;')
 silent call system('if [ ! -d ' . &dir . ' ]; then mkdir -p ' . &dir . '; fi;')
@@ -54,8 +57,8 @@ map <ESC>[C <C-Right>
 map! <ESC>[D <C-Left>
 map! <ESC>[C <C-Right>
 
-nnoremap <C-L> :nohls<CR><C-L>
-inoremap <C-L> <C-O>:nohls<CR>
+nnoremap <C-L> :nohls<CR>:syn sync fromstart<CR><C-L>
+inoremap <C-L> <C-O>:nohls<CR><C-O>:syn sync fromstart<CR>
 
 nnoremap Y y$
 
@@ -127,3 +130,7 @@ endfunction
 autocmd VimEnter * call AirlineInit()
 
 let NERDTreeShowHidden = 1
+
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
